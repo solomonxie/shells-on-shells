@@ -127,7 +127,6 @@ alias py="PYTHONPATH=. python"
 alias pt="PYTHONPATH=. pytest -svra"
 alias virpy="PYTHONPATH=. .git/venv/bin/python"
 alias webdav="python3 -m http.server 7000"
-alias vir="[ -e .git/venv ] && source .git/venv/bin/activate || source venv/bin/activate"
 
 #######################################################################
 #                          MAC APPLICATIONS                           #

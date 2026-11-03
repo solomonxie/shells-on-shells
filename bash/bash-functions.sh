@@ -40,6 +40,24 @@ port2proc() {
 }
 
 
+# Activate the first of .venv, venv or .git/venv, here or at the git repo's root
+vir() {
+    local dir root venv
+    root=$(git rev-parse --show-toplevel 2>/dev/null)
+    for dir in "$PWD" ${root:+"$root"}; do
+        for venv in .venv venv .git/venv; do
+            if [[ -f "$dir/$venv/bin/activate" ]]; then
+                source "$dir/$venv/bin/activate"
+                echo "Activated $dir/$venv"
+                return 0
+            fi
+        done
+    done
+    echo "No .venv, venv or .git/venv found"
+    return 1
+}
+
+
 sslo() {
     pkill ss-local
     nohup ss-local -c $1 -v 1> /tmp/ssclient.log 2> /tmp/ssclient-err.log &
